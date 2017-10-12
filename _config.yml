@@ -10,7 +10,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Author Settings
 author: 陈凤栋 # add your name
 author-img: img_me.jpg # add your photo
-about-author: I am a web developer focusing on front-end development. Always hungry to keep learning. # add description
+about-author: Hi, I'm Chen Fengdong, a Neiwaijianxiu Android senior engineer.
+ # add description
 twitter: # add your Twitter handle
 facebook: # add your Facebook handle
 github: artemsheludko # add your Github handle
