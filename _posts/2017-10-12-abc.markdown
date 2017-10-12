@@ -1,0 +1,9 @@
+---
+layout: post
+title: 我是一个程序猿，我对象是小可爱冬冬，我师傅是大牛李磊
+date: 2017-10-12 00:00:00 +0300
+description: 今天是2017年10月12号，这是第一条信息，以后会不定时更新，自勉
+img: timg.jpeg # Add image post (optional)
+tags: [Programming, Learn] # add tag
+---
+今天是2017年10月12号，这是第一条信息，以后会不定时更新，自勉
