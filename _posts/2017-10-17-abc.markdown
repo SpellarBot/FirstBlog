@@ -1,9 +1,0 @@
----
-layout: post
-title: 我爱北京天安门
-date: 2017-10-17 00:00:00 +0300
-description: 天安门上太阳升
-img: team.jpg # Add image post (optional)
-tags: [Team] # add tag
----
-我爱你，陈凤栋

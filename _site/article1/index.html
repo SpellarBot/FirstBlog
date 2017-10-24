@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Android禁止状态栏下拉 - 陈凤栋的博客</title>
+	<meta name="description" content="Android禁止状态栏下拉">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/img_me.jpg" alt="陈凤栋"></a>
+      </div>
+      <div class="author-name">陈凤栋</div>
+      <p>Hi, I'm Chen Fengdong, a Neiwaijianxiu Android senior engineer.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <p style='text-align: center;'> QQ:787740434 </p>
+      <p style='text-align: center;'> WeChat:Mo_Maek_0 </p>
+      <p style='text-align: center;'> SinaWeibo: Blurt_Chen</p>
+      <p> 友情链接：<a href="http://lilei.acept.top/">大牛的博客</a></p>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2017 &copy; 陈凤栋</p>
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1265023924'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1265023924%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    <div class="page-cover-image">
+      <img class="page-image" src=/assets/img/zhuangtailan.jpeg alt="Android禁止状态栏下拉">
+    </div> <!-- End Page Cover Image -->
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Android禁止状态栏下拉</h1>
+        <div class="page-date"><span>2017, Oct 24&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h3 id="需求禁止用户下拉状态栏">需求：禁止用户下拉状态栏</h3>
+<p>今天一个朋友问我，为了防止误操作如何<strong>禁止状态栏下拉</strong>，由于之前公司业务不涉及这块，所以没有研究过这块儿。百度上好多方法，我就不一一列举了，好多方法已经废弃，有的方法需要定制机器或者修改内部代码，我就直接把可以实现的代码贴出来。</p>
+
+<blockquote>
+  <p>在android6.0之前想要用WindowManager还蛮简单的，这是之前的方法但是改版之后因为安全的问题，需要用户手动确认某些权限，于是乎直接在权限处引用<strong>SYSTEM_ALERT_WINDOW</strong>就不满足了，还要在APP执行时再问一次使用者并且解释原因。如果不使用，可能会导致程序crash。</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(!</span> <span class="n">Settings</span><span class="o">.</span><span class="na">canDrawOverlays</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">))</span> <span class="o">{</span>
+     <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span>
+     <span class="n">ACTION_MANAGE_OVERLAY_PERMISSION</span><span class="o">,</span>
+     <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"package:"</span> <span class="o">+</span> <span class="n">getPackageName</span><span class="o">()));</span>
+            <span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>运行后会出现下图情况</p>
+
+<p><img src="http://img.blog.csdn.net/20160727165127868" alt="" /></p>
+
+<p>（图片来源于网络）</p>
+
+<h3 id="activity页面">Activity页面</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">CustomViewGroup</span> <span class="n">view</span><span class="o">;</span>
+   <span class="n">WindowManager</span> <span class="n">manager</span><span class="o">;</span>
+   
+   <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">mymain</span><span class="o">);</span>
+   		<span class="c1">//此处可以写获取权限代码</span>
+        <span class="n">prohibitDropDown</span><span class="o">();</span>
+        <span class="o">.....</span>
+    <span class="o">}</span>
+        <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+        <span class="o">.....</span>
+        <span class="n">allowDropDown</span><span class="o">();</span>
+        <span class="o">.....</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="禁止下拉的代码">禁止下拉的代码</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">prohibitDropDown</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="o">((</span><span class="n">WindowManager</span><span class="o">)</span> <span class="n">getApplicationContext</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">WINDOW_SERVICE</span><span class="o">));</span>
+        <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">localLayoutParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">();</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">TYPE_SYSTEM_ERROR</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">gravity</span> <span class="o">=</span> <span class="n">Gravity</span><span class="o">.</span><span class="na">TOP</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">flags</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_NOT_FOCUSABLE</span><span class="o">|</span>
+                <span class="c1">// this is to enable the notification to recieve touch events</span>
+                <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_NOT_TOUCH_MODAL</span> <span class="o">|</span>
+                <span class="c1">// Draws over status bar</span>
+                <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_LAYOUT_IN_SCREEN</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">getResources</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getDisplayMetrics</span><span class="o">().</span><span class="na">scaledDensity</span><span class="o">);</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">format</span> <span class="o">=</span> <span class="n">PixelFormat</span><span class="o">.</span><span class="na">TRANSPARENT</span><span class="o">;</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomViewGroup</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">view</span><span class="o">,</span> <span class="n">localLayoutParams</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="允许下拉的方法">允许下拉的方法</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">private</span> <span class="kt">void</span> <span class="nf">allowDropDown</span><span class="o">(){</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">removeView</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>在该页面关闭或应用最小化时调用allowDropDown()方法，否则在其他应用中也无法下拉状态栏了</p>
+</blockquote>
+
+<h3 id="补充说明">补充说明：</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在AndroidManifest中一定要加上权限</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.SYSTEM_ALERT_WINDOW"</span> <span class="o">/&gt;</span>
+<span class="c1">//否则选择权限时可能会出现选择不了的情况。</span>
+</code></pre></div></div>
+
+
+      <div class="page-footer">
+        <!-- <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Android禁止状态栏下拉&url=http://localhost:4000/article1/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=http://localhost:4000/article1/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/article1/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div> -->
+        <div class="page-tag">
+          
+            <a href="/tags#Android" class="tag">&#35; Android</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//mr-brown.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTMxNS83ODY0">
+  <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+  </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</article> <!-- End Article Page -->
+
+
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

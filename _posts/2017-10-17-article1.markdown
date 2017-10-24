@@ -1,0 +1,86 @@
+---
+layout: post
+title: Android禁止状态栏下拉
+date: 2017-10-24 00:00:00 +0300
+description: Android禁止状态栏下拉
+img: zhuangtailan.jpeg # Add image post (optional)
+tags: [Android] # add tag [*,*]
+---
+### 需求：禁止用户下拉状态栏
+今天一个朋友问我，为了防止误操作如何**禁止状态栏下拉**，由于之前公司业务不涉及这块，所以没有研究过这块儿。百度上好多方法，我就不一一列举了，好多方法已经废弃，有的方法需要定制机器或者修改内部代码，我就直接把可以实现的代码贴出来。
+
+>在android6.0之前想要用WindowManager还蛮简单的，这是之前的方法但是改版之后因为安全的问题，需要用户手动确认某些权限，于是乎直接在权限处引用**SYSTEM\_ALERT\_WINDOW**就不满足了，还要在APP执行时再问一次使用者并且解释原因。如果不使用，可能会导致程序crash。
+
+```java
+if (! Settings.canDrawOverlays(MainActivity.this)) {
+     Intent intent = new Intent(Settings.
+     ACTION_MANAGE_OVERLAY_PERMISSION,
+     Uri.parse("package:" + getPackageName()));
+            startActivity(intent); }
+```
+
+运行后会出现下图情况
+
+![](http://img.blog.csdn.net/20160727165127868)
+
+（图片来源于网络）
+
+### Activity页面
+```java
+   CustomViewGroup view;
+   WindowManager manager;
+   
+   @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mymain);
+   		//此处可以写获取权限代码
+        prohibitDropDown();
+        .....
+    }
+        @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        .....
+        allowDropDown();
+        .....
+    }
+```
+
+### 禁止下拉的代码
+```java
+private void prohibitDropDown() {
+        manager = ((WindowManager) getApplicationContext()
+                .getSystemService(Context.WINDOW_SERVICE));
+        WindowManager.LayoutParams localLayoutParams = new WindowManager.LayoutParams();
+        localLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+        localLayoutParams.gravity = Gravity.TOP;
+        localLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|
+                // this is to enable the notification to recieve touch events
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+                // Draws over status bar
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        localLayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        localLayoutParams.height = (int) (50 * getResources()
+                .getDisplayMetrics().scaledDensity);
+        localLayoutParams.format = PixelFormat.TRANSPARENT;
+        view = new CustomViewGroup(this);
+        manager.addView(view, localLayoutParams);
+    }
+```
+
+### 允许下拉的方法
+```java
+   private void allowDropDown(){
+        manager.removeView(view);
+    }
+```
+>在该页面关闭或应用最小化时调用allowDropDown()方法，否则在其他应用中也无法下拉状态栏了
+
+### 补充说明：
+```java
+//在AndroidManifest中一定要加上权限
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+//否则选择权限时可能会出现选择不了的情况。
+```
+

@@ -45,7 +45,7 @@
       <p style='text-align: center;'> QQ:787740434 </p>
       <p style='text-align: center;'> WeChat:Mo_Maek_0 </p>
       <p style='text-align: center;'> SinaWeibo: Blurt_Chen</p>
-      <!-- <p> 友情链接：<a href="http://lilei.acept.top/">大牛的博客</a></p> -->
+      <p> 友情链接：<a href="http://lilei.acept.top/">大牛的博客</a></p>
     </section> <!-- End Section Contact -->
     <div class="copyright">
       <p>2017 &copy; 陈凤栋</p>
@@ -57,14 +57,13 @@
   
 <article class="post">
   
-    <a class="post-thumbnail" style="background-image: url(/assets/img/team.jpg)" href="/abc/"></a>
+    <a class="post-thumbnail" style="background-image: url(/assets/img/zhuangtailan.jpeg)" href="/article1/"></a>
   
   <div class="post-content">
-    <h2 class="post-title"><a href="/abc/">我爱北京天安门</a></h2>
-    <p>我爱你，陈凤栋
-</p>
-    <span class="post-date">2017, Oct 17&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-    <span class="post-words">1 minute read</span>
+    <h2 class="post-title"><a href="/article1/">Android禁止状态栏下拉</a></h2>
+    <p>需求：禁止用户下拉状态栏 今天一个朋友问我，为了防止误操作如何禁止状态栏下拉，由于之前公司业务不涉及这块，所以没有研究过这块儿。百度上好多方法，我就不一一列举了，好多方法已经废弃，有的方法需要定制机器或者修改内部代码，我就直接把可以实现的代码贴出来。 在android6.0之前想要用WindowManager还蛮简单的，这是之前的方法但是改版之后因为安全的问题，需要用户手动确认某些权限，于是乎直接在权限处引用SYSTEM_ALERT_WINDOW就不满足了，还要在APP执行时再问一次使用者并且解释原因。如果不使用，可能会导致程序crash。 if (! Settings.canDrawOverlays(MainActivity.this)) { Intent intent = new Intent(Settings. ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" +...</p>
+    <span class="post-date">2017, Oct 24&nbsp;&nbsp;&nbsp;—&nbsp;</span>
+    <span class="post-words">2 minute read</span>
   </div>
 </article>
 
