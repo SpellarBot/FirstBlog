@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    <entry>
+      <title><![CDATA[Android禁止状态栏下拉]]></title>
+      <url>/android/2017/10/25/article2/</url>
+      <content type="html"><![CDATA[<h3 id="需求禁止用户下拉状态栏">需求：禁止用户下拉状态栏</h3>
+<p>今天一个朋友问我，为了防止误操作如何<strong>禁止状态栏下拉</strong>，由于之前公司业务不涉及这块，所以没有研究过这块儿。百度上好多方法，我就不一一列举了，好多方法已经废弃，有的方法需要定制机器或者修改内部代码，我就直接把可以实现的代码贴出来。</p>
+
+<blockquote>
+  <p>在android6.0之前想要用WindowManager还蛮简单的，这是之前的方法但是改版之后因为安全的问题，需要用户手动确认某些权限，于是乎直接在权限处引用<strong>SYSTEM_ALERT_WINDOW</strong>就不满足了，还要在APP执行时再问一次使用者并且解释原因。如果不使用，可能会导致程序crash。</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(!</span> <span class="n">Settings</span><span class="o">.</span><span class="na">canDrawOverlays</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">))</span> <span class="o">{</span>
+     <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span>
+     <span class="n">ACTION_MANAGE_OVERLAY_PERMISSION</span><span class="o">,</span>
+     <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"package:"</span> <span class="o">+</span> <span class="n">getPackageName</span><span class="o">()));</span>
+            <span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span> <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>运行后会出现下图情况</p>
+
+<p><img src="http://img.blog.csdn.net/20160727165127868" alt="" /></p>
+
+<p>（图片来源于网络）</p>
+
+<h3 id="activity页面">Activity页面</h3>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>   <span class="n">CustomViewGroup</span> <span class="n">view</span><span class="o">;</span>
+   <span class="n">WindowManager</span> <span class="n">manager</span><span class="o">;</span>
+   
+   <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">mymain</span><span class="o">);</span>
+   		<span class="c1">//此处可以写获取权限代码</span>
+        <span class="n">prohibitDropDown</span><span class="o">();</span>
+        <span class="o">.....</span>
+    <span class="o">}</span>
+        <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+        <span class="o">.....</span>
+        <span class="n">allowDropDown</span><span class="o">();</span>
+        <span class="o">.....</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="禁止下拉的代码">禁止下拉的代码</h3>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">prohibitDropDown</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="o">((</span><span class="n">WindowManager</span><span class="o">)</span> <span class="n">getApplicationContext</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">WINDOW_SERVICE</span><span class="o">));</span>
+        <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">localLayoutParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">();</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">TYPE_SYSTEM_ERROR</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">gravity</span> <span class="o">=</span> <span class="n">Gravity</span><span class="o">.</span><span class="na">TOP</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">flags</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_NOT_FOCUSABLE</span><span class="o">|</span>
+                <span class="c1">// this is to enable the notification to recieve touch events</span>
+                <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_NOT_TOUCH_MODAL</span> <span class="o">|</span>
+                <span class="c1">// Draws over status bar</span>
+                <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_LAYOUT_IN_SCREEN</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">;</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">getResources</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getDisplayMetrics</span><span class="o">().</span><span class="na">scaledDensity</span><span class="o">);</span>
+        <span class="n">localLayoutParams</span><span class="o">.</span><span class="na">format</span> <span class="o">=</span> <span class="n">PixelFormat</span><span class="o">.</span><span class="na">TRANSPARENT</span><span class="o">;</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomViewGroup</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">view</span><span class="o">,</span> <span class="n">localLayoutParams</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="允许下拉的方法">允许下拉的方法</h3>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>   <span class="kd">private</span> <span class="kt">void</span> <span class="nf">allowDropDown</span><span class="o">(){</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">removeView</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+<blockquote>
+  <p>在该页面关闭或应用最小化时调用allowDropDown()方法，否则在其他应用中也无法下拉状态栏了</p>
+</blockquote>
+
+<h3 id="补充说明">补充说明：</h3>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在AndroidManifest中一定要加上权限</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.SYSTEM_ALERT_WINDOW"</span> <span class="o">/&gt;</span>
+<span class="c1">//否则选择权限时可能会出现选择不了的情况。</span>
+</code></pre>
+</div>
+]]></content>
+      <categories>
+        
+          <category> Android </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Android </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+</search>
