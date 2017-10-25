@@ -6,7 +6,7 @@
 # Site
 title: 陈凤栋的博客
 subtitle:
-description: 如果你不喜欢现在的工作，要么辞职不干，要么就闭嘴不言
+description: 见贤思齐焉，见不贤而内自省也
 author: 陈凤栋
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: zh-Hans
@@ -264,9 +264,9 @@ sidebar:
   #  - always  expand for all pages automatically
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggle.
-  display: post
-  #display: always
-  #display: hide
+  # display: post
+  # display: always
+  display: hide
   #display: remove
 
   # Sidebar offset from top menubar in pixels.
@@ -277,7 +277,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button
-  scrollpercent: false
+  scrollpercent: true
 
 
 # Blog rolls
@@ -405,7 +405,7 @@ changyan:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+livere_uid: MTAyMC8zMTMxNS83ODY0
 
 # Baidu Share
 # Available value:
@@ -434,7 +434,7 @@ changyan:
 #yandex_site_verification:
 
 # CNZZ count
-#cnzz_siteid:
+cnzz_siteid: 1265023924
 
 # Application Insights
 # See https://azure.microsoft.com/en-us/services/application-insights/
