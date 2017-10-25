@@ -4,7 +4,8 @@
     <entry>
       <title><![CDATA[Android禁止状态栏下拉]]></title>
       <url>/android/2017/10/25/article2/</url>
-      <content type="html"><![CDATA[<h3 id="需求禁止用户下拉状态栏">需求：禁止用户下拉状态栏</h3>
+      <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=3389171764,974422162&amp;fm=214&amp;gp=0.jpg" alt="" /></p>
+<h3 id="需求禁止用户下拉状态栏">需求：禁止用户下拉状态栏</h3>
 <p>今天一个朋友问我，为了防止误操作如何<strong>禁止状态栏下拉</strong>，由于之前公司业务不涉及这块，所以没有研究过这块儿。百度上好多方法，我就不一一列举了，好多方法已经废弃，有的方法需要定制机器或者修改内部代码，我就直接把可以实现的代码贴出来。</p>
 
 <blockquote>
@@ -94,6 +95,8 @@
       <tags>
         
           <tag> Android </tag>
+        
+          <tag> android </tag>
         
       </tags>
       <tags></tags>
