@@ -83,10 +83,10 @@ keywords: "Jekyll, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: false
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2017
 
 # icon between year and author @Footer
 authoricon: heart
@@ -213,8 +213,11 @@ font:
 # Social Links
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
-#social:
-  #LinkLabel: Link
+social:
+  GitHub: https://github.com/CFdong
+  Weibo: http://weibo.com/cainiaoxiaofeng/profile?rightmod=1&wvr=6&mod=personinfo
+  # Bigcow: http://lilei.acept.top/
+  Friend: http://lilei.acept.top/
 
 
 # Social Links Icons
@@ -227,13 +230,14 @@ social_icons:
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
-  # Twitter: twitter
+  # Bigcow: twitter
   Weibo: weibo
+  Friend: twitter
 
 
 # Sidebar Avatar
 # in directory: /assets/images/avatar.gif
-#avatar:
+avatar: /assets/images/mypic.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -257,7 +261,7 @@ toc:
 sidebar:
   # Sidebar Position, available value: left | right
   position: left
-  #position: right
+  # position: right
 
   # Sidebar Display, available value:
   #  - post    expand on posts automatically. Default.
@@ -267,7 +271,7 @@ sidebar:
   # display: post
   # display: always
   display: hide
-  #display: remove
+  # display: remove
 
   # Sidebar offset from top menubar in pixels.
   offset: 12
