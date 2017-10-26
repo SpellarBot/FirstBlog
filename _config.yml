@@ -333,7 +333,7 @@ post_wordcount:
 
 # Declare license on posts
 post_copyright:
-  enable: false
+  enable: true
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
@@ -357,7 +357,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
@@ -491,27 +491,27 @@ rating:
 
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
-leancloud_visitors:
-  enable: true
-  app_id: Nam1OE77ms8wL7XtiSVEhqui-gzGzoHsz
-  app_key: bTmfuya4P9kEFJ2q0nvt0Wgs
+# leancloud_visitors:
+#   enable: false
+#   app_id: Nam1OE77ms8wL7XtiSVEhqui-gzGzoHsz
+#   app_key: bTmfuya4P9kEFJ2q0nvt0Wgs
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
-  # custom uv span for the whole site
+  enable: true
+  # custom uv span for the whole site <i class="fa fa-user"></i>
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
-  site_uv_footer:
-  # custom pv span for the whole site
+  site_uv_header: 访问人数
+  site_uv_footer: 人
+  # custom pv span for the whole site <i class="fa fa-eye"></i>
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv_header: 总访问量
+  site_pv_footer: 次
   # custom pv span for one page only
-  page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
+  page_pv: false
+  page_pv_header: <i class="fa fa-file-o"></i>阅读数
   page_pv_footer:
 
 
