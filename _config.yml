@@ -502,12 +502,12 @@ busuanzi_count:
   # count values only if the other configs are false
   enable: true
   # custom uv span for the whole site <i class="fa fa-user"></i>
-  site_uv: true
+  site_uv: false
   site_uv_header: 访问人数
   site_uv_footer: 人
   # custom pv span for the whole site <i class="fa fa-eye"></i>
   site_pv: true
-  site_pv_header: 总访问量
+  site_pv_header: 本站访问量
   site_pv_footer: 次
   # custom pv span for one page only
   page_pv: false
