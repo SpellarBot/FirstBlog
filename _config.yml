@@ -507,7 +507,7 @@ busuanzi_count:
   site_uv_footer: 人
   # custom pv span for the whole site <i class="fa fa-eye"></i>
   site_pv: true
-  site_pv_header: 本站访问量
+  site_pv_header: 本站总访问量
   site_pv_footer: 次
   # custom pv span for one page only
   page_pv: false
