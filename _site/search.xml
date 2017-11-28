@@ -2,6 +2,29 @@
 <search>
   
     <entry>
+      <title><![CDATA[初探RxJava2.0(一)]]></title>
+      <url>/android/rxjava/2017/10/27/rxjava/</url>
+      <content type="html"><![CDATA[<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1509042730436&amp;di=5f7f8ff3e59dfc0fd9a329ffae91d160&amp;imgtype=0&amp;src=http%3A%2F%2Fstatic.cnbetacdn.com%2Farticle%2F2017%2F0209%2F3be006e9dab1fba.jpg" alt="" />
+其实RxJava刚出来的时候就有所耳闻，但是并没有去学，当时忙着弄react系列的东西等。就这样错过了RxJava1.0，希望现在学习也不晚，之前自己很懒惰，希望可以坚持把写博客这件事情做下去，不为别的，只是为了自己懂得更多。</p>
+]]></content>
+      <categories>
+        
+          <category> Android </category>
+        
+          <category> RxJava </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Android </tag>
+        
+          <tag> RxJava </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[Android禁止状态栏下拉]]></title>
       <url>/android/2017/10/25/article2/</url>
       <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=3389171764,974422162&amp;fm=214&amp;gp=0.jpg" alt="" /></p>
