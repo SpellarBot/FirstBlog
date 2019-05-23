@@ -25,7 +25,7 @@ When in doubt see Tim Pope's blogpost [A Note About Git Commit Messages](http://
 
 ## Follow the existing coding standards
 
-When contributing to open source project it is polite to follow the original authors coding standars. They might be different than yours. It is not a holy war. Just follow then original.
+When contributing to open source project it is polite to follow the original authors coding standard. They might be different than yours. It is not a holy war. Just follow then original.
 
 ```javascript
 var snake_case = "something";
